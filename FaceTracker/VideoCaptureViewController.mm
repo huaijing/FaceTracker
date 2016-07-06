@@ -80,7 +80,8 @@ const int kFrameTimeBufferSize = 5;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
+//    [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
+    [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:FALSE];
     [_captureSession startRunning];
 }
 

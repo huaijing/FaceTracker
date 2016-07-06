@@ -288,6 +288,7 @@
 					armv6,
 					armv7,
 				);
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -296,6 +297,7 @@
 				GCC_PREFIX_HEADER = "FaceTracker/FaceTracker-Prefix.pch";
 				INFOPLIST_FILE = "FaceTracker/FaceTracker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.iphone.everphoto;
 				PRODUCT_NAME = FaceTracker;
 				WRAPPER_EXTENSION = app;
 			};
@@ -308,6 +310,7 @@
 					armv6,
 					armv7,
 				);
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -316,6 +319,7 @@
 				GCC_PREFIX_HEADER = "FaceTracker/FaceTracker-Prefix.pch";
 				INFOPLIST_FILE = "FaceTracker/FaceTracker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.iphone.everphoto;
 				PRODUCT_NAME = FaceTracker;
 				WRAPPER_EXTENSION = app;
 			};
