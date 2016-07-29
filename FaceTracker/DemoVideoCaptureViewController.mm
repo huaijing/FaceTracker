@@ -150,42 +150,74 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
         NSString *layerName = [layer name];
 		if ([layerName isEqualToString:@"FaceLayer"])
 			[layer setHidden:YES];
-	}	
+	}
     
     // Create transform to convert from vide frame coordinate space to view coordinate space
     CGAffineTransform t = [self affineTransformForVideoFrame:rect orientation:videoOrientation];
 
-    for (int i = 0; i < faces.size(); i++) {
-  
-        CGRect faceRect;
-        faceRect.origin.x = faces[i].x;
-        faceRect.origin.y = faces[i].y;
-        faceRect.size.width = faces[i].width;
-        faceRect.size.height = faces[i].height;
-    
-        faceRect = CGRectApplyAffineTransform(faceRect, t);
-        
-        CALayer *featureLayer = nil;
-        
-        while (!featureLayer && (currentSublayer < sublayersCount)) {
-			CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
-			if ([[currentLayer name] isEqualToString:@"FaceLayer"]) {
-				featureLayer = currentLayer;
-				[currentLayer setHidden:NO];
-			}
-		}
-        
-        if (!featureLayer) {
-            // Create a new feature marker layer
-			featureLayer = [[CALayer alloc] init];
-            featureLayer.name = @"FaceLayer";
-            featureLayer.borderColor = [[UIColor redColor] CGColor];
-            featureLayer.borderWidth = 10.0f;
-			[self.view.layer addSublayer:featureLayer];
-			[featureLayer release];
-		}
-        
-        featureLayer.frame = faceRect;
+    for (int i = 0; i < 2*faces.size(); i++) {
+        if (i < faces.size()) {
+            CGRect faceRect;
+            faceRect.origin.x = faces[i].x;
+            faceRect.origin.y = faces[i].y;
+            faceRect.size.width = faces[i].width;
+            faceRect.size.height = faces[i].height;
+            
+            faceRect = CGRectApplyAffineTransform(faceRect, t);
+            
+            CALayer *featureLayer = nil;
+            
+            while (!featureLayer && (currentSublayer < sublayersCount)) {
+                CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
+                if ([[currentLayer name] isEqualToString:@"FaceLayer"]) {
+                    featureLayer = currentLayer;
+                    [currentLayer setHidden:NO];
+                }
+            }
+            
+            if (!featureLayer) {
+                // Create a new feature marker layer
+                featureLayer = [[CALayer alloc] init];
+                featureLayer.name = @"FaceLayer";
+                featureLayer.borderColor = [[UIColor redColor] CGColor];
+                featureLayer.borderWidth = 10.0f;
+                [self.view.layer addSublayer:featureLayer];
+                [featureLayer release];
+            }
+            
+            featureLayer.frame = faceRect;
+        } else {
+            int j = i - faces.size();
+            CGRect faceRect;
+            faceRect.origin.x = faces[j].x + faces[j].width / 2.0;
+            faceRect.origin.y = faces[j].y + faces[j].height / 2.0;
+            faceRect.size.width = 3;
+            faceRect.size.height = 3;
+            
+            faceRect = CGRectApplyAffineTransform(faceRect, t);
+            
+            CALayer *featureLayer = nil;
+            
+            while (!featureLayer && (currentSublayer < sublayersCount)) {
+                CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
+                if ([[currentLayer name] isEqualToString:@"FaceLayer"]) {
+                    featureLayer = currentLayer;
+                    [currentLayer setHidden:NO];
+                }
+            }
+            
+            if (!featureLayer) {
+                // Create a new feature marker layer
+                featureLayer = [[CALayer alloc] init];
+                featureLayer.name = @"FaceLayer";
+                featureLayer.borderColor = [[UIColor redColor] CGColor];
+                featureLayer.borderWidth = 5.0f;
+                [self.view.layer addSublayer:featureLayer];
+                [featureLayer release];
+            }
+            
+            featureLayer.frame = faceRect;
+        }
     }
     
     [CATransaction commit];
