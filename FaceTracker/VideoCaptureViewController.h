@@ -51,7 +51,7 @@
 @property (nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 
 
-// -1: default, 0: back camera, 1: front camera
+// 1: default, 0: back camera, 1: front camera
 @property (nonatomic, assign) int camera;
 
 // These should only be modified in the initializer
